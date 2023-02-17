@@ -1,5 +1,5 @@
+import { DetailCrawler } from "modules/Crawler/views/Detail";
 import { ListCrawler } from "modules/Crawler/views/List";
-import { RegisterCrawler } from "modules/Crawler/views/Register";
 import NotFound from "views/404";
 
 const routes = [
@@ -23,7 +23,7 @@ const routes = [
       label: "routes.crawler.label",
     },
     path: "/f",
-    element: RegisterCrawler,
+    element: DetailCrawler,
     exact: true,
   },
   /**

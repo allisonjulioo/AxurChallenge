@@ -1,9 +1,20 @@
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/reducers';
+import { CrawlerState } from './store/action-types';
+
 const ListCrawler = () => {
+  const listCrawlers = useSelector<RootState, CrawlerState[]>(
+    state => state.listCrawlers,
+  );
+
+  console.log(listCrawlers);
+
   return (
     <div>
-      <h2>List crawler</h2>
+      <span>List crawler</span>
     </div>
   );
 };
 
 export { ListCrawler };
+
