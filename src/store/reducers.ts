@@ -1,12 +1,8 @@
-import {
-  listCrawlers,
-  newCrawler,
-} from 'modules/Crawler/store/reducer';
+import * as crawlersReducers from 'modules/Crawler/store/reducer';
 import { combineReducers } from 'redux';
 
 const reducers = combineReducers({
-  newCrawler,
-  listCrawlers,
+  ...crawlersReducers,
 });
 
 export default reducers;

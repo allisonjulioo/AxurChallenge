@@ -2,9 +2,19 @@ import {
   ActionCrawler,
   AddCrawlerAction,
   ListCrawlerAction,
+  ModalCrawlerAction,
 } from './action-types';
 
 const initialState = [] as ListCrawlerAction[];
+
+const openModalCrawl = (state = false, action: ModalCrawlerAction) => {
+  switch (action.type) {
+    case ActionCrawler.MODAL_CRAWLER:
+      return action.payload;
+    default:
+      return state;
+  }
+};
 
 const newCrawler = (state = null, action: AddCrawlerAction) => {
   switch (action.type) {
@@ -24,4 +34,4 @@ const listCrawlers = (state = initialState, action: ListCrawlerAction) => {
   }
 };
 
-export { newCrawler, listCrawlers };
+export { newCrawler, listCrawlers, openModalCrawl };

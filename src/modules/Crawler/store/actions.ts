@@ -4,9 +4,19 @@ import {
   AddCrawlerAction,
   CrawlerState,
   ListCrawlerAction,
+  ModalCrawlerAction,
 } from './action-types';
 
-export const addCrwaler = (payload: CrawlerState) => {
+export const openModalCrawler = (payload: boolean) => {
+  return (dispatch: Dispatch<ModalCrawlerAction>) => {
+    dispatch({
+      type: ActionCrawler.MODAL_CRAWLER,
+      payload,
+    });
+  };
+};
+
+export const addCrawler = (payload: CrawlerState) => {
   return (dispatch: Dispatch<AddCrawlerAction>) => {
     dispatch({
       type: ActionCrawler.NEW_CRAWLER,
@@ -15,7 +25,7 @@ export const addCrwaler = (payload: CrawlerState) => {
   };
 };
 
-export const listCrwalers = (payload: CrawlerState[]) => {
+export const listCrawlers = (payload: CrawlerState[]) => {
   return (dispatch: Dispatch<ListCrawlerAction>) => {
     dispatch({
       type: ActionCrawler.LIST_CRAWLER,

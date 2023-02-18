@@ -20,18 +20,6 @@ const ItemCrawled = styled(GridCrawled)`
   margin-bottom: 0.5em;
 `;
 
-const TopList = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1em;
-
-  h5 {
-    color: #949494;
-    font-weight: 400;
-  }
-`;
-
 const ListCrawlers = () => {
   const crawlers = useSelector<RootState, CrawlerState[]>(
     ({ listCrawlers }) => listCrawlers,
@@ -43,10 +31,6 @@ const ListCrawlers = () => {
 
   return (
     <div>
-      <TopList>
-        <h5>Executados</h5>
-        <Button>Nova busca</Button>
-      </TopList>
       <HeadList>
         <span>ID</span>
         <span>Keyword</span>
