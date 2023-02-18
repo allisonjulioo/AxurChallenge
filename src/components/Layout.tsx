@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { useRoute } from 'router/useRoute';
 import styled from 'styled-components';
 
@@ -30,6 +31,29 @@ const Content = styled.div`
     > h2 {
       margin-bottom: 2em;
     }
+
+    > section {
+      display: flex;
+      gap: 1em;
+      align-items: center;
+
+      button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+
+        span {
+          position: relative;
+          top: -3px;
+          font-size: 28px;
+        }
+
+        &:hover {
+          background: #d1d1d1;
+        }
+      }
+    }
   }
 `;
 
@@ -44,18 +68,27 @@ const Head = styled.div`
   justify-content: space-between;
 `;
 
-const Layout: FC<PropsWithChildren> = ({ children }) => {
-  const { state } = useRoute();
+const Layout: FC<PropsWithChildren<{ id: string }>> = ({ children, id }) => {
+  const navigate = useNavigate();
+
+  const { state } = useRoute(id);
 
   const { t } = useTranslation();
 
   return (
     <Container>
-      <Menu></Menu>
+      <Menu>asdda</Menu>
       <Content>
         <Head>Web Crawlers</Head>
         <main>
-          <h2>{t(state.title)}</h2>
+          <section>
+            {state.back && (
+              <button onClick={() => navigate(-1)}>
+                <span>←</span>
+              </button>
+            )}
+            <h2>{t(state.title)}</h2>
+          </section>
           {children}
         </main>
       </Content>

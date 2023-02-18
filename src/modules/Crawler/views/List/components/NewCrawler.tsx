@@ -3,8 +3,9 @@ import { Input } from 'components/Input';
 import { Modal } from 'components/Modal';
 import { useCrawler } from 'modules/Crawler/hooks/useCrawler';
 import { ActionCrawler } from 'modules/Crawler/store/action-types';
-import { FC, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { openModalCrawler } from 'modules/Crawler/store/actions';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/reducers';
 import styled from 'styled-components';
 
@@ -15,7 +16,9 @@ const BodyModal = styled.div`
   gap: 2em;
 `;
 
-const InputNewCrawler: FC<{ open: boolean }> = ({ open }) => {
+const InputNewCrawler = () => {
+  const dispatch = useDispatch();
+
   const openModalCrawl = useSelector<RootState, boolean>(
     ({ openModalCrawl }) => openModalCrawl,
   );
@@ -24,8 +27,16 @@ const InputNewCrawler: FC<{ open: boolean }> = ({ open }) => {
 
   const [keyword, setKeyWord] = useState('');
 
-  const handleAddNewCrawl = () => {
-    if (keyword) addNewCrawler(keyword);
+  const handleAddNewCrawl = async () => {
+    if (!keyword) {
+      return;
+    }
+
+    const { data } = await addNewCrawler(keyword);
+
+    if (data) {
+      dispatch(openModalCrawler(false));
+    }
   };
 
   return (

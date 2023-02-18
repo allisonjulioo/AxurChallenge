@@ -3,6 +3,7 @@ import {
   ActionCrawler,
   AddCrawlerAction,
   CrawlerState,
+  DetailCrawlerAction,
   ListCrawlerAction,
   ModalCrawlerAction,
 } from './action-types';
@@ -29,6 +30,15 @@ export const listCrawlers = (payload: CrawlerState[]) => {
   return (dispatch: Dispatch<ListCrawlerAction>) => {
     dispatch({
       type: ActionCrawler.LIST_CRAWLER,
+      payload,
+    });
+  };
+};
+
+export const detailCrawlers = (payload: CrawlerState) => {
+  return (dispatch: Dispatch<DetailCrawlerAction>) => {
+    dispatch({
+      type: ActionCrawler.DETAIL_CRAWLER,
       payload,
     });
   };

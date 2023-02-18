@@ -7,11 +7,10 @@ const Router = () => {
 
   return (
     <Routes location={location} key={location.pathname}>
-      {routes.map(route => (
+      {routes.map((route, index) => (
         <Route
-          key={route.key}
+          key={index}
           path={route.pathname}
-          id={route.key}
           element={<AnimatedRoute {...route} />}
         />
       ))}

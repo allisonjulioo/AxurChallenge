@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { ListCrawlers } from './components/ListCrawlers';
-import { useCrawler } from '../../hooks/useCrawler';
 import { Button } from 'components/Button';
-import { InputNewCrawler } from './components/NewCrawler';
-import { useDispatch } from 'react-redux';
 import { openModalCrawler } from 'modules/Crawler/store/actions';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { useCrawler } from '../../hooks/useCrawler';
+import { ListCrawlers } from './components/ListCrawlers';
+import { InputNewCrawler } from './components/NewCrawler';
 
 const Container = styled.div``;
 
@@ -22,27 +22,21 @@ const TopList = styled.div`
 `;
 
 const ListCrawler = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
   const dispatch = useDispatch();
 
-  const { getCrawlers } = useCrawler();
+  const { getAllCrawlers } = useCrawler();
 
   const handleOpenModal = () => {
     dispatch(openModalCrawler(true));
   };
 
-  const handleCloseModal = () => {
-    dispatch(openModalCrawler(false));
-  };
-
   useEffect(() => {
-    getCrawlers();
-  }, [getCrawlers]);
+    getAllCrawlers();
+  }, [getAllCrawlers]);
 
   return (
     <Container>
-      <InputNewCrawler open={isOpen} />
+      <InputNewCrawler />
       <TopList>
         <h5>Executados</h5>
         <Button onClick={handleOpenModal}>Nova busca</Button>

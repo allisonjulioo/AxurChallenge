@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Button = styled.button`
   border: 0;
-  outline: 0;
   padding: 0;
   cursor: pointer;
   border-radius: ${({ theme }) => theme.radius};
@@ -14,7 +13,7 @@ export const Button = styled.button`
   padding: 12px 36px;
 
   &:hover {
-    filter: brightness(110%);
+    filter: brightness(120%);
   }
 
   &:active {

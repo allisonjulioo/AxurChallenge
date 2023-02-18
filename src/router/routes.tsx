@@ -7,20 +7,24 @@ const routes = [
    * @Crawler
    */
   {
-    key: 'CRAWLER_LIST',
+    id: 'CRAWLER_LIST',
     state: {
       title: 'routes.crawler.list',
       label: 'routes.crawler.label',
+      visible: true,
+      back: false,
     },
     pathname: '/',
     element: ListCrawler,
     exact: true,
   },
   {
-    key: 'CRAWLER_REGISTER',
+    id: 'CRAWLER_REGISTER',
     state: {
-      title: 'routes.crawler.register',
+      title: 'routes.crawler.detail',
       label: 'routes.crawler.label',
+      visible: false,
+      back: true,
     },
     pathname: '/:id',
     element: DetailCrawler,
@@ -30,10 +34,12 @@ const routes = [
    * @NotFound
    */
   {
-    key: 'NOT_FOUND',
+    id: 'NOT_FOUND',
     state: {
       title: 'routes.404',
       label: 'routes.404',
+      visible: false,
+      back: false,
     },
     pathname: '*',
     element: NotFound,
