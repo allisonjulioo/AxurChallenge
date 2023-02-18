@@ -1,6 +1,7 @@
 import {
-  listCrawlers, newCrawler
-} from 'modules/Crawler/views/List/store/reducer';
+  listCrawlers,
+  newCrawler,
+} from 'modules/Crawler/store/reducer';
 import { combineReducers } from 'redux';
 
 const reducers = combineReducers({

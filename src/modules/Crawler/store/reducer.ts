@@ -1,14 +1,10 @@
 import {
   ActionCrawler,
   AddCrawlerAction,
-  ListCrawlerAction
+  ListCrawlerAction,
 } from './action-types';
 
-const initialState = [
-  {
-    text: '',
-  },
-];
+const initialState = [] as ListCrawlerAction[];
 
 const newCrawler = (state = null, action: AddCrawlerAction) => {
   switch (action.type) {
@@ -29,4 +25,3 @@ const listCrawlers = (state = initialState, action: ListCrawlerAction) => {
 };
 
 export { newCrawler, listCrawlers };
-

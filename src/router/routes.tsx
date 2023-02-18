@@ -1,28 +1,28 @@
-import { DetailCrawler } from "modules/Crawler/views/Detail";
-import { ListCrawler } from "modules/Crawler/views/List";
-import NotFound from "views/404";
+import { DetailCrawler } from 'modules/Crawler/views/Detail';
+import { ListCrawler } from 'modules/Crawler/views/List';
+import NotFound from 'views/404';
 
 const routes = [
   /**
    * @Crawler
    */
   {
-    key: "CRAWLER_LIST",
+    key: 'CRAWLER_LIST',
     state: {
-      title: "routes.crawler.list",
-      label: "routes.crawler.label",
+      title: 'routes.crawler.list',
+      label: 'routes.crawler.label',
     },
-    path: "/",
+    pathname: '/',
     element: ListCrawler,
     exact: true,
   },
   {
-    key: "CRAWLER_REGISTER",
+    key: 'CRAWLER_REGISTER',
     state: {
-      title: "routes.crawler.register",
-      label: "routes.crawler.label",
+      title: 'routes.crawler.register',
+      label: 'routes.crawler.label',
     },
-    path: "/f",
+    pathname: '/:id',
     element: DetailCrawler,
     exact: true,
   },
@@ -30,12 +30,12 @@ const routes = [
    * @NotFound
    */
   {
-    key: "NOT_FOUND",
+    key: 'NOT_FOUND',
     state: {
-      title: "routes.404",
-      label: "routes.404",
+      title: 'routes.404',
+      label: 'routes.404',
     },
-    path: "*",
+    pathname: '*',
     element: NotFound,
     exact: true,
   },

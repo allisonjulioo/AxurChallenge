@@ -1,5 +1,10 @@
 import { Dispatch } from 'react';
-import { ActionCrawler, AddCrawlerAction, CrawlerState, ListCrawlerAction } from './action-types';
+import {
+  ActionCrawler,
+  AddCrawlerAction,
+  CrawlerState,
+  ListCrawlerAction,
+} from './action-types';
 
 export const addCrwaler = (payload: CrawlerState) => {
   return (dispatch: Dispatch<AddCrawlerAction>) => {

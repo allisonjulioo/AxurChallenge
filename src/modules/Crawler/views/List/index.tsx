@@ -1,20 +1,24 @@
-import { useSelector } from 'react-redux';
-import { RootState } from 'store/reducers';
-import { CrawlerState } from './store/action-types';
+import { useEffect } from 'react';
+import styled from 'styled-components';
+import { ListCrawlers } from './components/ListCrawlers';
+import { useCrawler } from '../../hooks/useCrawler';
+
+const Container = styled.div`
+  height: 100vh;
+`;
 
 const ListCrawler = () => {
-  const listCrawlers = useSelector<RootState, CrawlerState[]>(
-    state => state.listCrawlers,
-  );
+  const { getCrawlers } = useCrawler();
 
-  console.log(listCrawlers);
+  useEffect(() => {
+    getCrawlers();
+  }, [getCrawlers]);
 
   return (
-    <div>
-      <span>List crawler</span>
-    </div>
+    <Container>
+      <ListCrawlers />
+    </Container>
   );
 };
 
 export { ListCrawler };
-

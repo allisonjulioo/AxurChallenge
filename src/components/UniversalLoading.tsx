@@ -7,4 +7,3 @@ const UniversalLoading = () => {
 };
 
 export { UniversalLoading };
-

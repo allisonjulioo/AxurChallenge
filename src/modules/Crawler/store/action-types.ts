@@ -4,7 +4,9 @@ export enum ActionCrawler {
 }
 
 export interface CrawlerState {
-  text: string;
+  id: string;
+  keyword: string;
+  status: string;
 }
 
 export interface AddCrawlerAction {

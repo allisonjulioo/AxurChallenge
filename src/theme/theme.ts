@@ -1,14 +1,14 @@
 const theme = {
   radius: '4px',
   common: {
-    black: '#222222',
-    white: '#fafafa',
+    black: '#333',
+    white: '#fff',
   },
   background: {
-    default: '#222',
+    default: '#f7f7f7',
   },
   typography: {
-    color: '#fafafa',
+    color: '#333',
     fontFamily: 'Roboto,sans-serif',
   },
   palette: {
@@ -33,11 +33,10 @@ const theme = {
       contrastText: '#fafafa',
     },
     grey: {
-      main: '#eeeeee',
-      contrastText: '#222',
+      main: '#b3b3b3',
+      contrastText: '#333',
     },
   },
 };
 
 export { theme };
-
