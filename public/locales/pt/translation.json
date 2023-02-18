@@ -1,0 +1,10 @@
+{
+  "general": {
+  
+  },
+  "routes": {
+    "crawler": {
+      "list": "Listagem de crawlers"
+    }
+  }
+}
