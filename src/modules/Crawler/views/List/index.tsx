@@ -1,6 +1,7 @@
 import { Button } from 'components/Button';
 import { openModalCrawler } from 'modules/Crawler/store/actions';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { useCrawler } from '../../hooks/useCrawler';
@@ -17,6 +18,8 @@ const TopList = styled.div`
 `;
 
 const ListCrawler = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
 
   const { getAllCrawlers } = useCrawler();
@@ -33,8 +36,10 @@ const ListCrawler = () => {
     <Container>
       <InputNewCrawler />
       <TopList>
-        <h5>Executados</h5>
-        <Button onClick={handleOpenModal}>Nova busca</Button>
+        <h5>{t('modules.crawler.views.list.subTitle')}</h5>
+        <Button onClick={handleOpenModal}>
+          {t('modules.crawler.views.list.buttonAdd')}
+        </Button>
       </TopList>
       <ListCrawlers />
     </Container>

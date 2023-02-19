@@ -82,7 +82,7 @@ const Modal: FC<PropsWithChildren<ModalI>> = props => {
             exit={{ opacity: 0.7, y: 1 }}
             transition={{ duration: 0.2 }}
           >
-            <ModalClose onClick={handleCloseModal}>x</ModalClose>
+            <ModalClose onClick={handleCloseModal}>✕</ModalClose>
             {children}
           </ModalBody>
         </ModalContainer>

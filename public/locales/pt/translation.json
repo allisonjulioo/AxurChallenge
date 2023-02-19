@@ -1,5 +1,46 @@
 {
   "general": {},
+  "components": {
+    "empty": {
+      "title": "Está vazio por aqui!",
+      "paragraph": "Sem dados"
+    },
+    "badge": {
+      "active": "Em andamento",
+      "done": "Concluido",
+      "error": "Não executado"
+    }
+  },
+  "modules": {
+    "crawler": {
+      "views": {
+        "list": {
+          "buttonAdd": "Nova busca",
+          "subTitle": "Executados",
+          "components": {
+            "modal": {
+              "title": "Criar nova pesquisa",
+              "placeholder": "Digite a palavra-chave",
+              "button": "Criar pesquisa"
+            }
+          },
+          "headList": {
+            "keyword": "Palavra-chave",
+            "id": "ID",
+            "status": "Status",
+            "result": "Resultado",
+            "createdAt": "Criado em",
+            "timer": "Tempo decorrido"
+          }
+        },
+        "detail": {
+          "head": {
+            "items": "itens"
+          }
+        }
+      }
+    }
+  },
   "routes": {
     "crawler": {
       "list": "Listagem de crawlers",

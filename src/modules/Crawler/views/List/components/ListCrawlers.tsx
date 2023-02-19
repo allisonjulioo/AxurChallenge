@@ -1,14 +1,14 @@
-import { Badge } from 'components/Badge';
 import { Card } from 'components/Card';
+import { Empty } from 'components/Empty';
+import { AnimatePresence } from 'framer-motion';
 import { ACTIVE_STATUS, useCrawler } from 'modules/Crawler/hooks/useCrawler';
 import { useCallback, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { RootState } from 'store/reducers';
 import styled from 'styled-components';
 import { CrawlerState } from '../../../store/action-types';
-import { differenceInMinutes, format } from 'date-fns';
-import { Empty } from 'components/Empty';
+import { ItemCrawler } from './ItemCrawler';
 
 const GridCrawled = styled(Card)`
   display: grid;
@@ -31,27 +31,10 @@ const HeadList = styled(GridCrawled)`
   }
 `;
 
-const ItemCrawled = styled(GridCrawled)`
-  cursor: pointer;
-  margin-bottom: 0.5em;
-  strong {
-    font-size: 1.4em;
-    line-height: 1;
-    text-align: right;
-
-    @media (max-width: ${({ theme }) => theme.breakpointMD}) {
-      display: none;
-    }
-  }
-  span {
-    padding-left: 0.2em;
-  }
-`;
-
 const TIMEOUT_POLLING = 5000;
 
 const ListCrawlers = () => {
-  let intervalCrawl: NodeJS.Timer;
+  const { t } = useTranslation();
 
   const { updateCrawler, getCrawlByIdExternal } = useCrawler();
 
@@ -66,7 +49,7 @@ const ListCrawlers = () => {
       ({ status }) => status === ACTIVE_STATUS,
     );
 
-    intervalCrawl = setInterval(() => {
+    const intervalCrawl = setInterval(() => {
       listOnlyActiveStatus.forEach(async item => {
         const isActive = item.status === ACTIVE_STATUS;
 
@@ -84,7 +67,6 @@ const ListCrawlers = () => {
   }, [crawlers, getCrawlByIdExternal, updateCrawler]);
 
   useEffect(() => {
-    clearInterval(intervalCrawl);
     const hasItemActive = crawlers.some(
       ({ status }) => status === ACTIVE_STATUS,
     );
@@ -101,32 +83,18 @@ const ListCrawlers = () => {
   return (
     <div>
       <HeadList>
-        <span>Keyword</span>
-        <span>ID</span>
-        <span>Status</span>
-        <span>Resultado</span>
-        <span>Criado em</span>
-        <span>Tempo decorrido</span>
+        <span>{t('modules.crawler.views.list.headList.keyword')}</span>
+        <span>{t('modules.crawler.views.list.headList.id')}</span>
+        <span>{t('modules.crawler.views.list.headList.status')}</span>
+        <span>{t('modules.crawler.views.list.headList.result')}</span>
+        <span>{t('modules.crawler.views.list.headList.createdAt')}</span>
+        <span>{t('modules.crawler.views.list.headList.timer')}</span>
       </HeadList>
-      {crawlers.map(crawl => (
-        <Link to={`/${crawl.id}`} key={crawl.id}>
-          <ItemCrawled>
-            <span>{crawl.keyword}</span>
-            <span>{crawl.id}</span>
-            <Badge text={crawl.status} />
-            <span>{crawl.urls?.length} urls</span>
-            <span>{format(new Date(crawl.created_at), 'dd/MM HH:mm ')}</span>
-            <span>
-              {differenceInMinutes(
-                new Date(crawl.updated_at),
-                new Date(crawl.created_at),
-              )}{' '}
-              min
-            </span>
-            <strong>›</strong>
-          </ItemCrawled>
-        </Link>
-      ))}
+      <AnimatePresence>
+        {crawlers.map((crawl, index) => (
+          <ItemCrawler crawl={crawl} key={crawl.id} delay={index} />
+        ))}
+      </AnimatePresence>
     </div>
   );
 };

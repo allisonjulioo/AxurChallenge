@@ -16,12 +16,12 @@ const app = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 app.render(
   <Provider store={store}>
     <BrowserRouter>
-      <Suspense fallback={<UniversalLoading />}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Suspense fallback={<UniversalLoading />}>
           <Router />
-        </ThemeProvider>
-      </Suspense>
+        </Suspense>
+      </ThemeProvider>
     </BrowserRouter>
   </Provider>,
 );

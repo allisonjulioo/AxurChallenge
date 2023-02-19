@@ -41,11 +41,13 @@ const useCrawler = () => {
 
   const getCrawlByIdExternal = useCallback(
     async (id: string) => {
-      const { data } = await axios.get<CrawlerState>(`${externalCraw}/${id}`);
+      const { data, status } = await axios.get<CrawlerState>(
+        `${externalCraw}/${id}`,
+      );
 
       dispatch(detailCrawlers(data));
 
-      return { data };
+      return { data, status };
     },
     [dispatch],
   );
@@ -76,7 +78,7 @@ const useCrawler = () => {
   );
 
   const addToInternalApi = async (arg: Partial<CrawlResponse>) => {
-    const { data: response } = await getCrawlByIdExternal(`${arg.id}`);
+    const { data: response, status } = await getCrawlByIdExternal(`${arg.id}`);
 
     const payload = {
       ...response,
@@ -92,6 +94,9 @@ const useCrawler = () => {
 
       return data;
     }
+
+    alert('Impossivel cirar' + status);
+    return { data: status };
   };
 
   const addNewCrawler = async (keyword: string) => {

@@ -3,6 +3,7 @@ import { Empty } from 'components/Empty';
 import { useCrawler } from 'modules/Crawler/hooks/useCrawler';
 import { CrawlerState } from 'modules/Crawler/store/action-types';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RootState } from 'store/reducers';
@@ -19,6 +20,10 @@ const Head = styled.div`
   margin: 1em 0.5em;
   display: flex;
   justify-content: space-between;
+
+  section {
+    text-align: right;
+  }
 `;
 
 const UrlList = styled.div`
@@ -27,6 +32,8 @@ const UrlList = styled.div`
 `;
 
 const DetailCrawler = () => {
+  const { t } = useTranslation();
+
   const { id } = useParams<{ id: string }>();
 
   const { getCrawlById } = useCrawler();
@@ -46,10 +53,12 @@ const DetailCrawler = () => {
           <h1>{crawl.keyword}</h1>
           <h5>ID: {crawl.id}</h5>
         </div>
-        <div>
+        <section>
           <Badge text={crawl.status} />
-          <span>{crawl.urls?.length} itens</span>
-        </div>
+          <span>
+            {crawl.urls?.length} {t('modules.crawler.views.detail.head.items')}
+          </span>
+        </section>
       </Head>
       <UrlList>
         {!crawl.urls?.length ? (

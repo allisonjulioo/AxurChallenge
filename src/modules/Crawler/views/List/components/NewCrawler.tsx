@@ -5,6 +5,7 @@ import { useCrawler } from 'modules/Crawler/hooks/useCrawler';
 import { ActionCrawler } from 'modules/Crawler/store/action-types';
 import { openModalCrawler } from 'modules/Crawler/store/actions';
 import { FormEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/reducers';
 import styled from 'styled-components';
@@ -22,6 +23,8 @@ const BodyModal = styled.div`
 `;
 
 const InputNewCrawler = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
 
   const openModalCrawl = useSelector<RootState, boolean>(
@@ -50,15 +53,19 @@ const InputNewCrawler = () => {
   return (
     <Modal open={openModalCrawl} action={ActionCrawler.MODAL_CRAWLER}>
       <BodyModal>
-        <h4>Criar nova pesquisa</h4>
+        <h4>{t('modules.crawler.views.list.components.modal.title')}</h4>
         <form onClick={handleAddNewCrawl}>
           <Input
-            placeholder='Digite a palavra'
+            placeholder={`${t(
+              'modules.crawler.views.list.components.modal.placeholder',
+            )}`}
             type='text'
             value={keyword}
             onChange={e => setKeyWord(e.target.value)}
           />
-          <Button type='submit'>Criar pesquisa</Button>
+          <Button type='submit'>
+            {t('modules.crawler.views.list.components.modal.button')}
+          </Button>
         </form>
       </BodyModal>
     </Modal>

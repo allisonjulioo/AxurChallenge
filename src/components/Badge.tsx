@@ -1,6 +1,7 @@
+import { darken, lighten } from 'polished';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { lighten } from 'polished';
 
 type Status = {
   [x: string]: {
@@ -12,9 +13,9 @@ type Status = {
 const BadgeContent = styled.small<{ variant: string }>`
   display: table;
   background: ${({ theme, variant }) =>
-    lighten(0.4, theme.palette[variant as keyof typeof theme.palette].main)};
+    lighten(0.3, theme.palette[variant as keyof typeof theme.palette].main)};
   color: ${({ theme, variant }) =>
-    theme.palette[variant as keyof typeof theme.palette].main};
+    darken(0.2, theme.palette[variant as keyof typeof theme.palette].main)};
   padding: 4px 6px;
   border-radius: ${({ theme }) => theme.radius};
   font-size: 12px;
@@ -22,24 +23,26 @@ const BadgeContent = styled.small<{ variant: string }>`
 
 const status: Status = {
   error: {
-    label: 'Não executado',
+    label: 'components.badge.error',
     variant: 'error',
   },
   done: {
-    label: 'Concluído',
+    label: 'components.badge.done',
     variant: 'success',
   },
   active: {
-    label: 'Em andamento',
+    label: 'components.badge.active',
     variant: 'primary',
   },
 };
 
 const Badge: FC<{ text?: string }> = ({ text }) => {
+  const { t } = useTranslation();
+
   const badge = status[text ?? 'error'];
   return (
     <div>
-      <BadgeContent variant={badge.variant}>{badge.label}</BadgeContent>
+      <BadgeContent variant={badge.variant}>{t(badge.label)}</BadgeContent>
     </div>
   );
 };
