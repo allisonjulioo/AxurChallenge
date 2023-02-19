@@ -3,7 +3,7 @@
   "routes": {
     "crawler": {
       "list": "Listagem de crawlers",
-      "detail": "Detalhe"
+      "detail": "Detalhe da pesquisa"
     }
   }
 }

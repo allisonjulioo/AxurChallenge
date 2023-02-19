@@ -9,6 +9,8 @@ export interface CrawlResponse {
   keyword: string;
   status: string;
   urls: string[];
+  created_ad: Date;
+  updated_at: Date;
 }
 
 const internalApiUrl = process.env.REACT_APP_INTERNAL_API_URL;
@@ -27,6 +29,17 @@ const useCrawler = () => {
   const dispatch = useDispatch();
 
   const getCrawlById = useCallback(
+    async (id: string) => {
+      const { data } = await axios.get<CrawlerState>(`${internalCraw}/${id}`);
+
+      dispatch(detailCrawlers(data));
+
+      return { data };
+    },
+    [dispatch],
+  );
+
+  const getCrawlByIdExternal = useCallback(
     async (id: string) => {
       const { data } = await axios.get<CrawlerState>(`${externalCraw}/${id}`);
 
@@ -52,6 +65,7 @@ const useCrawler = () => {
       const payload = {
         urls: crawl.urls,
         status: crawl.status,
+        updated_at: new Date(),
       };
 
       await axios.patch<CrawlerState>(`${internalCraw}/${crawl.id}`, payload);
@@ -62,11 +76,13 @@ const useCrawler = () => {
   );
 
   const addToInternalApi = async (arg: Partial<CrawlResponse>) => {
-    const { data: response } = await getCrawlById(`${arg.id}`);
+    const { data: response } = await getCrawlByIdExternal(`${arg.id}`);
 
     const payload = {
       ...response,
       keyword: arg.keyword,
+      created_at: new Date(),
+      updated_at: new Date(),
     };
 
     const { data } = await axios.post<CrawlerState>(internalCraw, payload);
@@ -88,6 +104,12 @@ const useCrawler = () => {
     return { data };
   };
 
-  return { getAllCrawlers, addNewCrawler, getCrawlById, updateCrawler };
+  return {
+    getAllCrawlers,
+    addNewCrawler,
+    getCrawlById,
+    updateCrawler,
+    getCrawlByIdExternal,
+  };
 };
 export { useCrawler };

@@ -13,12 +13,7 @@ const TopList = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1em;
-
-  h5 {
-    color: #949494;
-    font-weight: 400;
-  }
+  margin: 1em 0;
 `;
 
 const ListCrawler = () => {

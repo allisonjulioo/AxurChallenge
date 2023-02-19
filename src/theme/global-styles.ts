@@ -24,6 +24,10 @@ span {
 a {
   text-decoration:none;
 }
+h5 {
+    color: #949494;
+    font-weight: 400;
+  }
 `;
 
 export { GlobalStyle };

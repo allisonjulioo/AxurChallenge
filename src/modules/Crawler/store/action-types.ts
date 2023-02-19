@@ -8,7 +8,9 @@ export enum ActionCrawler {
 export interface CrawlerState {
   id: string;
   keyword: string;
-  status?: string;
+  status: string;
+  created_at: Date;
+  updated_at: Date;
   urls?: string[];
 }
 

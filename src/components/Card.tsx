@@ -5,7 +5,7 @@ export const Card = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 1em;
+  padding: 0.8em 1em;
   border-radius: ${({ theme }) => theme.radius};
   background-color: ${({ theme }) => theme.common.white};
   transition: all 0.3s ease-in-out;

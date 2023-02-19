@@ -4,6 +4,6 @@ export const Input = styled.input`
   background: ${({ theme }) => theme.common.white};
   color: ${({ theme }) => theme.typography.color};
   border: 1px solid ${({ theme }) => theme.palette.grey.main};
-  padding: 1em 0.5em;
+  padding: 1em;
   border-radius: ${({ theme }) => theme.radius};
 `;

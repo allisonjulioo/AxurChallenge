@@ -9,16 +9,6 @@ const Container = styled.div`
   min-height: 100vh;
 `;
 
-const Menu = styled.div`
-  background: ${({ theme }) => theme.palette.primary.main};
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 2em 0;
-  min-height: 100vh;
-  width: 200px;
-`;
-
 const Content = styled.div`
   width: 100%;
   margin: 0 1em;
@@ -65,7 +55,8 @@ const Head = styled.div`
   border-bottom: 1px solid hsla(0, 0%, 58%, 0.3);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 8px;
 `;
 
 const Layout: FC<PropsWithChildren<{ id: string }>> = ({ children, id }) => {
@@ -77,9 +68,15 @@ const Layout: FC<PropsWithChildren<{ id: string }>> = ({ children, id }) => {
 
   return (
     <Container>
-      <Menu>asdda</Menu>
       <Content>
-        <Head>Web Crawlers</Head>
+        <Head>
+          <img
+            height='14'
+            src='https://assets-global.website-files.com/61e1949f83dad6619067b896/61fa945e6618694b924c6eb1_logo.svg'
+            alt=''
+          />
+          <span>| Web Crawlers</span>
+        </Head>
         <main>
           <section>
             {state.back && (

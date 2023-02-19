@@ -1,5 +1,6 @@
 const theme = {
   radius: '4px',
+  breakpointMD: '981px',
   common: {
     black: '#333',
     white: '#fff',
