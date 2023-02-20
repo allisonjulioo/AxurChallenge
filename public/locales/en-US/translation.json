@@ -30,7 +30,7 @@
             "status": "Status",
             "result": "Result",
             "createdAt": "Created at",
-            "timer": "Timer"
+            "timer": "Elapsed time"
           }
         },
         "detail": {

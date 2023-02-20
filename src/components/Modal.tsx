@@ -73,7 +73,10 @@ const Modal: FC<PropsWithChildren<ModalI>> = props => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.1 }}
           >
-            <ModalBackdrop onClick={handleCloseModal} />
+            <ModalBackdrop
+              data-testid='modal-backdrop'
+              onClick={handleCloseModal}
+            />
           </motion.div>
 
           <ModalBody
@@ -82,7 +85,9 @@ const Modal: FC<PropsWithChildren<ModalI>> = props => {
             exit={{ opacity: 0.7, y: 1 }}
             transition={{ duration: 0.2 }}
           >
-            <ModalClose onClick={handleCloseModal}>✕</ModalClose>
+            <ModalClose data-testid='modal-close' onClick={handleCloseModal}>
+              ✕
+            </ModalClose>
             {children}
           </ModalBody>
         </ModalContainer>

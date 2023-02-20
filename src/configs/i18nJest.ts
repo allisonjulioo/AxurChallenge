@@ -6,7 +6,9 @@ const languages = {
 };
 
 const runI18nSetup = async () => {
-  const translation = await import('../../public/locales/pt/translation.json');
+  const translation = await import(
+    '../../public/locales/pt-BR/translation.json'
+  );
   i18n.use(initReactI18next).init({
     resources: {
       [languages.ptBR]: {

@@ -8,7 +8,7 @@ const detection = {
   lookupQuerystring: 'lng',
 };
 
-const supportedLngs = ['en', 'pt'];
+const supportedLngs = ['en-US', 'pt-BR'];
 
 const configBase = {
   fallbackLng: i18next.options.lng,

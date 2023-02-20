@@ -16,7 +16,7 @@ const ButtonLanguage = styled.button<{ active: boolean }>`
 `;
 
 const LanguageSelector = () => {
-  const [language, setLanguage] = useState('pt');
+  const [language, setLanguage] = useState(navigator.language);
 
   const handleSelectLanguage = (lng: string) => {
     setLanguage(lng);
@@ -26,14 +26,16 @@ const LanguageSelector = () => {
   return (
     <section>
       <ButtonLanguage
-        active={language === 'en'}
-        onClick={() => handleSelectLanguage('en')}
+        aria-label='Language to english'
+        active={language === 'en-US'}
+        onClick={() => handleSelectLanguage('en-US')}
       >
         <img alt='English' src={require('assets/us.png')} />
       </ButtonLanguage>
       <ButtonLanguage
-        active={language === 'pt'}
-        onClick={() => handleSelectLanguage('pt')}
+        aria-label='Idioma para português'
+        active={language === 'pt-BR'}
+        onClick={() => handleSelectLanguage('pt-BR')}
       >
         <img alt='Portuguese' src={require('assets/pt.png')} />
       </ButtonLanguage>

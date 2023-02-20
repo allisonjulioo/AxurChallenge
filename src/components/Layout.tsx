@@ -52,7 +52,7 @@ const Content = styled.div`
   }
 `;
 
-const Head = styled.div`
+const Head = styled.nav`
   width: 100%;
   height: 48px;
   padding: 1em 0;
@@ -61,7 +61,8 @@ const Head = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  section {
+  section,
+  nav {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -86,7 +87,7 @@ const Layout: FC<PropsWithChildren<{ id: string }>> = ({ children, id }) => {
         <main>
           <section>
             {state.back && (
-              <button onClick={() => navigate(-1)}>
+              <button onClick={() => navigate(-1)} aria-label='Botão voltar'>
                 <span>←</span>
               </button>
             )}

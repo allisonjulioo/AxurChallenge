@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 const Loading = styled.div`
-  background-color: white;
+  background-color: ${({ theme }) => theme.common.white};
   width: 100%;
   height: 100vh;
   display: flex;

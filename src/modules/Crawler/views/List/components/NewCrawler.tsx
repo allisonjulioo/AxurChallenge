@@ -23,6 +23,8 @@ const BodyModal = styled.div`
 `;
 
 const InputNewCrawler = () => {
+  const [disabled, setDisabled] = useState(false);
+
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
@@ -42,7 +44,11 @@ const InputNewCrawler = () => {
       return;
     }
 
+    setDisabled(true);
+
     const { data } = await addNewCrawler(keyword);
+
+    setDisabled(false);
 
     if (data) {
       dispatch(openModalCrawler(false));
@@ -56,14 +62,16 @@ const InputNewCrawler = () => {
         <h4>{t('modules.crawler.views.list.components.modal.title')}</h4>
         <form onClick={handleAddNewCrawl}>
           <Input
+            disabled={disabled}
             placeholder={`${t(
               'modules.crawler.views.list.components.modal.placeholder',
             )}`}
+            name='input-keyword'
             type='text'
             value={keyword}
             onChange={e => setKeyWord(e.target.value)}
           />
-          <Button type='submit'>
+          <Button disabled={disabled} type='submit'>
             {t('modules.crawler.views.list.components.modal.button')}
           </Button>
         </form>

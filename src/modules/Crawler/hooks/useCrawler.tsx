@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { externalInstance, internalInstance } from 'configs/axios';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { CrawlerState } from '../store/action-types';
@@ -13,14 +13,6 @@ export interface CrawlResponse {
   updated_at: Date;
 }
 
-const internalApiUrl = process.env.REACT_APP_INTERNAL_API_URL;
-
-const externalApiUrl = process.env.REACT_APP_EXTERNAL_API_URL;
-
-const internalCraw = `${internalApiUrl}/crawl`;
-
-const externalCraw = `${externalApiUrl}/crawl`;
-
 export const ACTIVE_STATUS = 'active';
 
 export const DONE_STATUS = 'done';
@@ -30,7 +22,7 @@ const useCrawler = () => {
 
   const getCrawlById = useCallback(
     async (id: string) => {
-      const { data } = await axios.get<CrawlerState>(`${internalCraw}/${id}`);
+      const { data } = await internalInstance.get<CrawlerState>(id);
 
       dispatch(detailCrawlers(data));
 
@@ -41,9 +33,7 @@ const useCrawler = () => {
 
   const getCrawlByIdExternal = useCallback(
     async (id: string) => {
-      const { data, status } = await axios.get<CrawlerState>(
-        `${externalCraw}/${id}`,
-      );
+      const { data, status } = await externalInstance.get<CrawlerState>(id);
 
       dispatch(detailCrawlers(data));
 
@@ -53,7 +43,7 @@ const useCrawler = () => {
   );
 
   const getAllCrawlers = useCallback(async () => {
-    const { data } = await axios.get<CrawlerState[]>(internalCraw);
+    const { data } = await internalInstance.get<CrawlerState[]>('');
 
     dispatch(listCrawlers(data));
 
@@ -70,7 +60,7 @@ const useCrawler = () => {
         updated_at: new Date(),
       };
 
-      await axios.patch<CrawlerState>(`${internalCraw}/${crawl.id}`, payload);
+      await internalInstance.patch<CrawlerState>(crawl.id, payload);
 
       getAllCrawlers();
     },
@@ -87,7 +77,7 @@ const useCrawler = () => {
       updated_at: new Date(),
     };
 
-    const { data } = await axios.post<CrawlerState>(internalCraw, payload);
+    const { data } = await internalInstance.post<CrawlerState>('', payload);
 
     if (data) {
       getAllCrawlers();
@@ -100,7 +90,9 @@ const useCrawler = () => {
   };
 
   const addNewCrawler = async (keyword: string) => {
-    const { data } = await axios.post<CrawlResponse>(externalCraw, { keyword });
+    const { data } = await externalInstance.post<CrawlResponse>('', {
+      keyword,
+    });
 
     if (data.id) {
       addToInternalApi({ keyword, id: data.id });

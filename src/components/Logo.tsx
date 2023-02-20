@@ -2,9 +2,10 @@ const Logo = () => {
   return (
     <section>
       <img
+        aria-label='Logotipo do app crawler'
+        alt='logo_axur'
         height='14'
-        src='https://assets-global.website-files.com/61e1949f83dad6619067b896/61fa945e6618694b924c6eb1_logo.svg'
-        alt=''
+        src={require('assets/logo.png')}
       />
       <span>| Web Crawlers</span>
     </section>
