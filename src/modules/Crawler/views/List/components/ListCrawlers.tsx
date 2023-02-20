@@ -1,3 +1,4 @@
+import async from 'async';
 import { Card } from 'components/Card';
 import { Empty } from 'components/Empty';
 import { AnimatePresence } from 'framer-motion';
@@ -49,20 +50,27 @@ const ListCrawlers = () => {
       ({ status }) => status === ACTIVE_STATUS,
     );
 
+    const queue = async.queue(async (item: CrawlerState) => {
+      const isActive = item.status === ACTIVE_STATUS;
+
+      if (isActive) {
+        const { data: crawl } = await getCrawlByIdExternal(item.id);
+        updateCrawler(crawl);
+      }
+    }, 1);
+
+    listOnlyActiveStatus.forEach(item => {
+      queue.push(item);
+    });
+
     const intervalCrawl = setInterval(() => {
-      listOnlyActiveStatus.forEach(async item => {
-        const isActive = item.status === ACTIVE_STATUS;
-
-        if (isActive) {
-          const { data: crawl } = await getCrawlByIdExternal(item.id);
-
-          updateCrawler(crawl);
-        }
+      listOnlyActiveStatus.forEach(item => {
+        queue.push(item);
       });
     }, TIMEOUT_POLLING);
 
     return () => {
-      return clearInterval(intervalCrawl);
+      clearInterval(intervalCrawl);
     };
   }, [crawlers, getCrawlByIdExternal, updateCrawler]);
 
