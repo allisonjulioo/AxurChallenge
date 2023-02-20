@@ -50,7 +50,7 @@ const InputNewCrawler = () => {
 
     setDisabled(false);
 
-    if (data) {
+    if (data?.id) {
       dispatch(openModalCrawler(false));
       setKeyWord('');
     }
@@ -60,7 +60,7 @@ const InputNewCrawler = () => {
     <Modal open={openModalCrawl} action={ActionCrawler.MODAL_CRAWLER}>
       <BodyModal>
         <h4>{t('modules.crawler.views.list.components.modal.title')}</h4>
-        <form onClick={handleAddNewCrawl}>
+        <form onSubmit={handleAddNewCrawl}>
           <Input
             disabled={disabled}
             placeholder={`${t(

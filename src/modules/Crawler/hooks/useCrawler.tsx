@@ -90,6 +90,15 @@ const useCrawler = () => {
   };
 
   const addNewCrawler = async (keyword: string) => {
+    const { data: registred } = await internalInstance.get<CrawlResponse[]>(
+      `?keyword=${keyword}`,
+    );
+
+    if (registred.length > 0) {
+      alert('Palavra cháve já cadastrada');
+      return { data: null };
+    }
+
     const { data } = await externalInstance.post<CrawlResponse>('', {
       keyword,
     });
