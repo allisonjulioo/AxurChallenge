@@ -29,8 +29,6 @@ externalInstance.interceptors.response.use(
     return response;
   },
   function (error) {
-    console.log(error);
-    
     alert(`Houve um erro ${JSON.stringify(error?.response?.data?.message)}`);
     return Promise.reject(error);
   },
