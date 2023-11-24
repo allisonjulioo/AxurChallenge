@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from 'store';
 import { ThemeProvider } from 'styled-components';
@@ -11,7 +11,7 @@ describe('Modal', () => {
   };
 
   it('renders with children when open prop is true', () => {
-    const { getByTestId } = render(
+    render(
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Modal {...defaultProps}>
@@ -20,11 +20,11 @@ describe('Modal', () => {
         </ThemeProvider>
       </Provider>,
     );
-    expect(getByTestId('modal-content')).toBeInTheDocument();
+    expect(screen.getByTestId('modal-content')).toBeInTheDocument();
   });
 
   it('calls action when clicking on the modal backdrop', () => {
-    const { getByTestId } = render(
+    render(
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Modal {...defaultProps}>
@@ -34,12 +34,13 @@ describe('Modal', () => {
       </Provider>,
     );
 
-    const modalBackdrop = getByTestId('modal-backdrop');
+    const modalBackdrop = screen.getByTestId('modal-backdrop');
+
     expect(modalBackdrop).toBeInTheDocument();
   });
 
   it('calls action when clicking on the modal close button', () => {
-    const { getByTestId, debug } = render(
+    render(
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Modal {...defaultProps}>
@@ -49,7 +50,26 @@ describe('Modal', () => {
       </Provider>,
     );
 
-    const modalCloseButton = getByTestId('modal-close');
+    const modalCloseButton = screen.getByTestId('modal-close');
+
+    expect(modalCloseButton).toBeInTheDocument();
+  });
+
+  it('calls action when clicking with action true', () => {
+    render(
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Modal {...defaultProps} action='store-test'>
+            <div data-testid='modal-content'>Test Content</div>
+          </Modal>
+        </ThemeProvider>
+      </Provider>,
+    );
+
+    const modalCloseButton = screen.getByTestId('modal-close');
+
+    fireEvent.click(modalCloseButton);
+
     expect(modalCloseButton).toBeInTheDocument();
   });
 });

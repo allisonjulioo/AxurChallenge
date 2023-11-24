@@ -9,7 +9,6 @@ import { store } from 'store';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'theme/global-styles';
 import { theme } from 'theme/theme';
-import reportWebVitals from './reportWebVitals';
 
 const app = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -25,5 +24,3 @@ app.render(
     </BrowserRouter>
   </Provider>,
 );
-
-reportWebVitals();

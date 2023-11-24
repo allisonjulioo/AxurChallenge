@@ -1,4 +1,17 @@
 describe('Test Crawler basic behaviors ', () => {
+  const randomWord = () => {
+    const characters = 'abcdefghijklmnopqrstuvwxyz'; // caracteres permitidos
+    let result = '';
+
+    for (let i = 0; i < 5; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters.charAt(randomIndex);
+    }
+
+    return result;
+  };
+  const randomTextWordCypress = `teste-${randomWord()}`;
+
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
   });
@@ -39,19 +52,19 @@ describe('Test Crawler basic behaviors ', () => {
 
     cy.get('button').contains('New search').click();
     cy.get('main').contains('Create new search');
-    cy.get('input[name="input-keyword"]').type('teste');
+    cy.get('input[name="input-keyword"]').type(randomTextWordCypress);
     cy.get('button').contains('Create search').click();
 
-    cy.get('main').contains('teste');
+    cy.get('main').contains(randomTextWordCypress);
     cy.get('main').contains('In progress');
   });
 
   it('Check detail crawl', () => {
-    cy.get('main').contains('teste').click();
+    cy.get('main').contains(randomTextWordCypress).click();
 
     cy.get('main').contains('Detail search');
 
-    cy.get('main').contains('teste');
+    cy.get('main').contains(randomTextWordCypress);
 
     cy.get('[aria-label="Botão voltar"]').click();
   });

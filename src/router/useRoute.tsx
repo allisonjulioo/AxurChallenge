@@ -1,7 +1,9 @@
 import { routes } from './routes';
 
 const useRoute = (id: string) => {
-  const { state } = routes.find(route => route.id === id)!;
+  const route = routes.find(route => route.id === id)!;
+
+  const state = route?.state;
 
   return { state };
 };
